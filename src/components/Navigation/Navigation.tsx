@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Logo } from './Logo/Logo';
+import { Logo } from '../Logo/Logo';
 
 const Nav = styled.div`
   display: flex;
