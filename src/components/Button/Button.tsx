@@ -20,5 +20,9 @@ const Btn = styled.button<{ disabled: boolean }>`
 `;
 
 export const Button = ({ text, disabled }: Props): JSX.Element => {
-  return <Btn disabled={disabled}>{text}</Btn>;
+  return (
+    <Btn type={'submit'} disabled={disabled}>
+      {text}
+    </Btn>
+  );
 };

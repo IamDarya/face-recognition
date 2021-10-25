@@ -1,3 +1,4 @@
+import { format } from 'path';
 import React from 'react';
 import styled from 'styled-components';
 import { Button } from '../Button/Button';
@@ -24,15 +25,26 @@ const Wrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
 `;
-
-export const ImageLinkForm = (): JSX.Element => {
+type Props = {
+  handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: () => void;
+};
+export const ImageLinkForm = ({
+  handleInputChange,
+  onSubmit,
+}: Props): JSX.Element => {
   return (
     <Wrapper>
       <Rank />
       <UserRank>{`Load the image and I will find faces there. Let's try!`}</UserRank>
-      <form>
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          onSubmit();
+        }}
+      >
         <InputBtnWrap>
-          <Input type={'text'} />
+          <Input type={'text'} handleInputChange={handleInputChange} />
           <Button disabled={false} text={'Detect'} />
         </InputBtnWrap>
       </form>

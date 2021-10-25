@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 type Props = {
   type: string;
+  handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const Inpt = styled.input`
@@ -14,6 +15,13 @@ const Inpt = styled.input`
   }
 `;
 
-export const Input = ({ type }: Props): JSX.Element => {
-  return <Inpt type={type}></Inpt>;
+export const Input = ({ type, handleInputChange }: Props): JSX.Element => {
+  return (
+    <Inpt
+      type={type}
+      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+        handleInputChange(event)
+      }
+    ></Inpt>
+  );
 };
