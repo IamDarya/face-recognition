@@ -11,6 +11,7 @@ const Nav = styled.div`
 const Link = styled.p`
   font-size: 1.5rem;
   color: #424242;
+  z-index: 1;
   &:hover {
     text-decoration: underline;
     cursor: pointer;

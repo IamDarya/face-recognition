@@ -4,14 +4,15 @@ import Tilt from 'react-parallax-tilt';
 import LogoPNG from '../../assets/logo.png';
 
 const TiltWrapper = styled.div`
-  width: 100px;
+  width: 70px;
 `;
 
 const LogoImg = styled.div`
   background-image: url(${LogoPNG});
   background-size: contain;
-  height: 100px;
+  height: 70px;
   background-repeat: no-repeat;
+  filter: contrast(0.7);
   &:hover {
     cursor: pointer;
   }

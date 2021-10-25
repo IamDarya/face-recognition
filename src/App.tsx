@@ -1,12 +1,13 @@
 import React from 'react';
 import './App.css';
 import { ImageLinkForm } from './components/ImageLinkForm/ImageLinkForm';
-import { Logo } from './components/Logo/Logo';
-import { Navigation } from './components/Navigation';
+import { Navigation } from './components/Navigation/Navigation';
+import { Particle } from './components/Particle/Particle';
 
 function App() {
   return (
     <div className="App">
+      <Particle />
       <Navigation />
       <ImageLinkForm />
       {/* <FaceRecognition />  */}
