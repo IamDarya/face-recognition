@@ -5,11 +5,17 @@ import { Navigation } from './components/Navigation/Navigation';
 import { Particle } from './components/Particle/Particle';
 import Clarifai from 'clarifai';
 import { FaceRecognition } from './components/FaceRecognition/FaceRecognition';
+import Box from './components/models/Box';
 
 function App() {
   const [input, setInput] = useState('');
   const [imageURL, setImageURL] = useState('');
-  const [box, setBox] = useState('');
+  const [box, setBox] = useState<Box>({
+    leftCol: undefined,
+    topRow: undefined,
+    rightCol: undefined,
+    bottomRow: undefined,
+  });
 
   const app = new Clarifai.App({
     apiKey: '5228c4b5259e489183b3b39d2ac2dd40',
@@ -32,9 +38,8 @@ function App() {
       bottomRow: height - clarifaiFace.bottom_row * height,
     };
   };
-  const displayFaceBox = (box: any) => {
+  const displayFaceBox = (box: Box) => {
     setBox(box);
-    console.log(box);
   };
   const onSubmit = () => {
     setImageURL(input);
@@ -52,7 +57,7 @@ function App() {
         onSubmit={onSubmit}
         handleInputChange={handleInputChange}
       />
-      <FaceRecognition imageURL={imageURL} />
+      <FaceRecognition box={box} imageURL={imageURL} />
     </div>
   );
 }
