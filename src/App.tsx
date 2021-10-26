@@ -19,8 +19,8 @@ function App() {
     console.log('click');
     app.models
       .predict(
-        '5228c4b5259e489183b3b39d2ac2dd40',
-        'https://samles.clarifai.com/face-det.jpg',
+        'a403429f2ddf4b49b307e318f00e528b',
+        'https://samples.clarifai.com/face-det.jpg',
       )
       .then(
         function (resp: any) {
