@@ -11,7 +11,7 @@ const InputBtnWrap = styled.div`
 const UserRank = styled.p`
   z-index: 3;
 `;
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

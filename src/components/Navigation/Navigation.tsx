@@ -6,7 +6,6 @@ const Nav = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  margin-bottom: 5%;
 `;
 const Link = styled.p`
   font-size: 1.5rem;

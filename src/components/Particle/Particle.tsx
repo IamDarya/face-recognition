@@ -8,6 +8,7 @@ const ParticleBackground = styled(Particles)`
   right: 0;
   bottom: 0;
   left: 0;
+  filter: opacity(0.8);
 `;
 
 export const Particle = (): JSX.Element => {
@@ -41,7 +42,7 @@ export const Particle = (): JSX.Element => {
             },
           },
           opacity: {
-            value: 0.7,
+            value: 1,
             random: false,
             anim: {
               enable: false,
