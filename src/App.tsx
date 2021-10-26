@@ -4,32 +4,44 @@ import { ImageLinkForm } from './components/ImageLinkForm/ImageLinkForm';
 import { Navigation } from './components/Navigation/Navigation';
 import { Particle } from './components/Particle/Particle';
 import Clarifai from 'clarifai';
+import { FaceRecognition } from './components/FaceRecognition/FaceRecognition';
 
 function App() {
   const [input, setInput] = useState('');
+  const [imageURL, setImageURL] = useState('');
+  const [box, setBox] = useState('');
 
   const app = new Clarifai.App({
     apiKey: '5228c4b5259e489183b3b39d2ac2dd40',
   });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(event.currentTarget.value);
     console.log(event.currentTarget.value);
   };
+  const calcFaceLocation = (data: any) => {
+    const clarifaiFace =
+      data.outputs[0].data.regions[0].region_info.bounding_box;
+    const image = document.getElementById('image');
+    const width = Number(image?.clientWidth);
+    const height = Number(image?.clientHeight);
+    return {
+      leftCol: clarifaiFace.left_col * width,
+      topRow: clarifaiFace.top_row * height,
+      rightCol: width - clarifaiFace.right_col * width,
+      bottomRow: height - clarifaiFace.bottom_row * height,
+    };
+  };
+  const displayFaceBox = (box: any) => {
+    setBox(box);
+    console.log(box);
+  };
   const onSubmit = () => {
-    console.log('click');
+    setImageURL(input);
     app.models
-      .predict(
-        'a403429f2ddf4b49b307e318f00e528b',
-        'https://samples.clarifai.com/face-det.jpg',
-      )
-      .then(
-        function (resp: any) {
-          console.log(resp);
-        },
-        function (err: Error) {
-          console.log(err);
-        },
-      );
+      .predict(Clarifai.FACE_DETECT_MODEL, input)
+      .then((resp: any) => displayFaceBox(calcFaceLocation(resp)))
+      .catch((err: Error) => console.log(err));
   };
 
   return (
@@ -40,7 +52,7 @@ function App() {
         onSubmit={onSubmit}
         handleInputChange={handleInputChange}
       />
-      {/* <FaceRecognition />  */}
+      <FaceRecognition imageURL={imageURL} />
     </div>
   );
 }
