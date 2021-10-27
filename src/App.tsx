@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { ImageLinkForm } from './components/ImageLinkForm/ImageLinkForm';
 import { Navigation } from './components/Navigation/Navigation';
@@ -27,7 +27,6 @@ function App() {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInput(event.currentTarget.value);
-    console.log(event.currentTarget.value);
   };
   const calcFaceLocation = (data: any) => {
     const clarifaiFace =
