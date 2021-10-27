@@ -19,6 +19,7 @@ function App() {
     bottomRow: undefined,
   });
   const [route, setRoute] = useState('signIn');
+  const [isSignIn, setIsSignIn] = useState(false);
 
   const app = new Clarifai.App({
     apiKey: '5228c4b5259e489183b3b39d2ac2dd40',
@@ -52,13 +53,18 @@ function App() {
       .catch((err: Error) => console.log(err));
   };
   const onRouteChange = (route: string) => {
+    if (route === 'signOut') {
+      setIsSignIn(false);
+    } else if (route === 'home') {
+      setIsSignIn(true);
+    }
     setRoute(route);
   };
 
   return (
     <div className="App">
       <Particle />
-      <Navigation onRouteChange={onRouteChange} />
+      <Navigation onRouteChange={onRouteChange} isSignIn={isSignIn} />
       {route === 'home' ? (
         <>
           <ImageLinkForm
