@@ -7,7 +7,7 @@ const Nav = styled.div`
   justify-content: space-between;
   padding: 10px;
 `;
-const Link = styled.p`
+const SignOut = styled.p`
   font-size: 1.5rem;
   color: #424242;
   z-index: 1;
@@ -16,12 +16,15 @@ const Link = styled.p`
     cursor: pointer;
   }
 `;
+type Props = {
+  onRouteChange: (route: string) => void;
+};
 
-export const Navigation = (): JSX.Element => {
+export const Navigation = ({ onRouteChange }: Props): JSX.Element => {
   return (
     <Nav>
       <Logo />
-      <Link>Sign Out</Link>
+      <SignOut onClick={() => onRouteChange('signIn')}>Sign Out</SignOut>
     </Nav>
   );
 };

@@ -2,7 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import './SignInForm.css';
 
-export const SignInForm = (): JSX.Element => {
+type Props = {
+  onRouteChange: (route: string) => void;
+};
+
+export const SignInForm = ({ onRouteChange }: Props): JSX.Element => {
   return (
     <main className="pa4 black-80">
       <form className="measure center">
@@ -33,6 +37,7 @@ export const SignInForm = (): JSX.Element => {
         </fieldset>
         <div>
           <input
+            onClick={() => onRouteChange('home')}
             className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
             type="submit"
             value="Sign in"

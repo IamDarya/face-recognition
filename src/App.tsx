@@ -17,6 +17,7 @@ function App() {
     rightCol: undefined,
     bottomRow: undefined,
   });
+  const [route, setRoute] = useState('signIn');
 
   const app = new Clarifai.App({
     apiKey: '5228c4b5259e489183b3b39d2ac2dd40',
@@ -49,17 +50,25 @@ function App() {
       .then((resp: any) => displayFaceBox(calcFaceLocation(resp)))
       .catch((err: Error) => console.log(err));
   };
+  const onRouteChange = (route: string) => {
+    setRoute(route);
+  };
 
   return (
     <div className="App">
       <Particle />
-      <Navigation />
-      <ImageLinkForm
-        onSubmit={onSubmit}
-        handleInputChange={handleInputChange}
-      />
-      <FaceRecognition box={box} imageURL={imageURL} />
-      <SignInForm />
+      <Navigation onRouteChange={onRouteChange} />
+      {route === 'signIn' ? (
+        <SignInForm onRouteChange={onRouteChange} />
+      ) : (
+        <>
+          <ImageLinkForm
+            onSubmit={onSubmit}
+            handleInputChange={handleInputChange}
+          />
+          <FaceRecognition box={box} imageURL={imageURL} />
+        </>
+      )}
     </div>
   );
 }
