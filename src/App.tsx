@@ -6,6 +6,7 @@ import { Particle } from './components/Particle/Particle';
 import Clarifai from 'clarifai';
 import { FaceRecognition } from './components/FaceRecognition/FaceRecognition';
 import Box from './components/models/Box';
+import { SignInForm } from './components/SignInForm/SignInForm';
 
 function App() {
   const [input, setInput] = useState('');
@@ -58,6 +59,7 @@ function App() {
         handleInputChange={handleInputChange}
       />
       <FaceRecognition box={box} imageURL={imageURL} />
+      <SignInForm />
     </div>
   );
 }
