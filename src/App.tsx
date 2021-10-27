@@ -7,6 +7,7 @@ import Clarifai from 'clarifai';
 import { FaceRecognition } from './components/FaceRecognition/FaceRecognition';
 import Box from './components/models/Box';
 import { SignInForm } from './components/SignInForm/SignInForm';
+import { Register } from './components/Register/Register';
 
 function App() {
   const [input, setInput] = useState('');
@@ -58,9 +59,7 @@ function App() {
     <div className="App">
       <Particle />
       <Navigation onRouteChange={onRouteChange} />
-      {route === 'signIn' ? (
-        <SignInForm onRouteChange={onRouteChange} />
-      ) : (
+      {route === 'home' ? (
         <>
           <ImageLinkForm
             onSubmit={onSubmit}
@@ -68,6 +67,10 @@ function App() {
           />
           <FaceRecognition box={box} imageURL={imageURL} />
         </>
+      ) : route === 'signIn' ? (
+        <SignInForm onRouteChange={onRouteChange} />
+      ) : (
+        <Register onRouteChange={onRouteChange} />
       )}
     </div>
   );
