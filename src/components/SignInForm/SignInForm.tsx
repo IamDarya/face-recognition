@@ -1,11 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
+import styled from 'styled-components';
 import './SignInForm.css';
+
+const Error = styled.label`
+  display: block;
+  color: red;
+  margin-bottom: 1rem;
+`;
 
 type Props = {
   onRouteChange: (route: string) => void;
 };
 
 export const SignInForm = ({ onRouteChange }: Props): JSX.Element => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [wrongUserData, setWrongUserData] = useState(true);
+  const [signInClicked, setSignInClicked] = useState(false);
+
+  const onEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.currentTarget.value);
+  };
+
+  const onPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.currentTarget.value);
+  };
+
+  const handleSignIn = () => {
+    console.log(email, password);
+    setSignInClicked(true);
+    fetch('http://localhost:3000/signIn', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        if (data === 'sing in successfully!') {
+          onRouteChange('home');
+        } else {
+          setWrongUserData(true);
+        }
+      });
+  };
+
   return (
     <main className="pa4 black-80">
       <form className="measure center">
@@ -18,6 +59,7 @@ export const SignInForm = ({ onRouteChange }: Props): JSX.Element => {
             <input
               className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
               type="email"
+              onChange={(event) => onEmailChange(event)}
             />
           </div>
           <div className="mv3">
@@ -27,19 +69,27 @@ export const SignInForm = ({ onRouteChange }: Props): JSX.Element => {
             <input
               className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
               type="password"
+              autoComplete="current-password"
+              onChange={(event) => onPasswordChange(event)}
             />
           </div>
         </fieldset>
+        {wrongUserData && signInClicked && (
+          <Error>Invalid email or password</Error>
+        )}
         <input
-          onClick={() => onRouteChange('home')}
+          onClick={(event) => {
+            event.preventDefault();
+            handleSignIn();
+          }}
           className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
-          type="submit"
+          type="button"
           value="Sign in"
         />
         <input
           onClick={() => onRouteChange('register')}
           className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
-          type="submit"
+          type="button"
           value="Register"
         />
       </form>

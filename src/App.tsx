@@ -9,7 +9,7 @@ import Box from './components/models/Box';
 import { SignInForm } from './components/SignInForm/SignInForm';
 import { Register } from './components/Register/Register';
 
-function App() {
+const App = () => {
   const [input, setInput] = useState('');
   const [imageURL, setImageURL] = useState('');
   const [box, setBox] = useState<Box>({
@@ -79,6 +79,6 @@ function App() {
       )}
     </div>
   );
-}
+};
 
 export default App;
