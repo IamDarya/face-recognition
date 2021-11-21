@@ -8,6 +8,7 @@ import { FaceRecognition } from './components/FaceRecognition/FaceRecognition';
 import Box from './components/models/Box';
 import { SignInForm } from './components/SignInForm/SignInForm';
 import { Register } from './components/Register/Register';
+import User from './components/models/user';
 
 const App = () => {
   const [input, setInput] = useState('');
@@ -20,10 +21,29 @@ const App = () => {
   });
   const [route, setRoute] = useState('signIn');
   const [isSignIn, setIsSignIn] = useState(false);
+  const [user, setUser] = useState<User>({
+    id: '',
+    name: '',
+    email: '',
+    password: '',
+    entries: 0,
+    joined: undefined,
+  });
 
   const app = new Clarifai.App({
     apiKey: '5228c4b5259e489183b3b39d2ac2dd40',
   });
+
+  const loadUser = (newUser: User) => {
+    setUser({
+      id: newUser.id,
+      name: newUser.name,
+      email: newUser.email,
+      password: newUser.password,
+      entries: newUser.entries,
+      joined: newUser.joined,
+    });
+  };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInput(event.currentTarget.value);
@@ -75,7 +95,7 @@ const App = () => {
       ) : route === 'signIn' ? (
         <SignInForm onRouteChange={onRouteChange} />
       ) : (
-        <Register onRouteChange={onRouteChange} />
+        <Register loadUser={loadUser} onRouteChange={onRouteChange} />
       )}
     </div>
   );

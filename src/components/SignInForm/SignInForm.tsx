@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import './SignInForm.css';
 
-const Error = styled.label`
+export const Error = styled.label`
   display: block;
   color: red;
   margin-bottom: 1rem;
@@ -59,6 +59,7 @@ export const SignInForm = ({ onRouteChange }: Props): JSX.Element => {
             <input
               className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
               type="email"
+              autoComplete="username"
               onChange={(event) => onEmailChange(event)}
             />
           </div>
