@@ -1,11 +1,16 @@
 import React from 'react';
 
-export const Rank = (): JSX.Element => {
+type Props = {
+  name: string;
+  entries: number;
+};
+
+export const Rank = ({ name, entries }: Props): JSX.Element => {
   return (
     <div>
       <p>
-        {`Smb, your current rank is `}
-        <span>{`#1`}</span>
+        {`${name}, your current rank is `}
+        <span>{`#${entries}`}</span>
       </p>
     </div>
   );

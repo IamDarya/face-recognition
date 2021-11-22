@@ -54,6 +54,7 @@ export const Register = ({ onRouteChange, loadUser }: Props): JSX.Element => {
   };
 
   return (
+    //TODO useEffect
     <main className="pa4 black-80">
       <form className="measure center">
         <fieldset className="ba b--transparent ph0 mh0">

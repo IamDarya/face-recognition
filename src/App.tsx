@@ -25,7 +25,6 @@ const App = () => {
     id: '',
     name: '',
     email: '',
-    password: '',
     entries: 0,
     joined: undefined,
   });
@@ -87,13 +86,14 @@ const App = () => {
       {route === 'home' ? (
         <>
           <ImageLinkForm
+            user={user}
             onSubmit={onSubmit}
             handleInputChange={handleInputChange}
           />
           <FaceRecognition box={box} imageURL={imageURL} />
         </>
       ) : route === 'signIn' ? (
-        <SignInForm onRouteChange={onRouteChange} />
+        <SignInForm loadUser={loadUser} onRouteChange={onRouteChange} />
       ) : (
         <Register loadUser={loadUser} onRouteChange={onRouteChange} />
       )}

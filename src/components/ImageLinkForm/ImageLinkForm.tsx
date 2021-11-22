@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
+import User from '../models/user';
 import { Rank } from '../Rank/Rank';
 
 const InputBtnWrap = styled.div`
@@ -27,14 +28,16 @@ export const Wrapper = styled.div`
 type Props = {
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: () => void;
+  user: User;
 };
 export const ImageLinkForm = ({
   handleInputChange,
   onSubmit,
+  user,
 }: Props): JSX.Element => {
   return (
     <Wrapper>
-      <Rank />
+      <Rank name={user.name} entries={user.entries} />
       <UserRank>{`Load the image and I will find faces there. Let's try!`}</UserRank>
       <form
         onSubmit={(event) => {

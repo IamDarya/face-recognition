@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import User from '../models/user';
 import './SignInForm.css';
 
 export const Error = styled.label`
@@ -10,9 +11,10 @@ export const Error = styled.label`
 
 type Props = {
   onRouteChange: (route: string) => void;
+  loadUser: (user: User) => void;
 };
 
-export const SignInForm = ({ onRouteChange }: Props): JSX.Element => {
+export const SignInForm = ({ onRouteChange, loadUser }: Props): JSX.Element => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [wrongUserData, setWrongUserData] = useState(true);
@@ -38,8 +40,9 @@ export const SignInForm = ({ onRouteChange }: Props): JSX.Element => {
       }),
     })
       .then((resp) => resp.json())
-      .then((data) => {
-        if (data === 'sing in successfully!') {
+      .then((user) => {
+        if (user.id) {
+          loadUser(user);
           onRouteChange('home');
         } else {
           setWrongUserData(true);
