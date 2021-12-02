@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import User from '../models/user';
+import User from '../models/User';
 import './SignInForm.css';
 
 export const Error = styled.label`

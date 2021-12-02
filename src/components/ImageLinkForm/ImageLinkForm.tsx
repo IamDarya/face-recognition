@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
-import User from '../models/user';
+import User from '../models/User';
 import { Rank } from '../Rank/Rank';
 
 const InputBtnWrap = styled.div`
@@ -27,12 +27,12 @@ export const Wrapper = styled.div`
 `;
 type Props = {
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: () => void;
+  onPictureSubmit: () => void;
   user: User;
 };
 export const ImageLinkForm = ({
   handleInputChange,
-  onSubmit,
+  onPictureSubmit,
   user,
 }: Props): JSX.Element => {
   return (
@@ -42,7 +42,7 @@ export const ImageLinkForm = ({
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          onSubmit();
+          onPictureSubmit();
         }}
       >
         <InputBtnWrap>

@@ -9,7 +9,7 @@ export const Rank = ({ name, entries }: Props): JSX.Element => {
   return (
     <div>
       <p>
-        {`${name}, your current rank is `}
+        {`${name}, your current entry count is `}
         <span>{`#${entries}`}</span>
       </p>
     </div>
