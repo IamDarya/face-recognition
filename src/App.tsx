@@ -3,12 +3,31 @@ import './App.css';
 import { ImageLinkForm } from './components/ImageLinkForm/ImageLinkForm';
 import { Navigation } from './components/Navigation/Navigation';
 import { Particle } from './components/Particle/Particle';
-import Clarifai from 'clarifai';
 import { FaceRecognition } from './components/FaceRecognition/FaceRecognition';
 import Box from './components/models/Box';
 import { SignInForm } from './components/SignInForm/SignInForm';
 import { Register } from './components/Register/Register';
-import User from './components/models/user';
+import User from './components/models/User';
+
+// const initialState = {
+// input: '',
+// imageURL: '',
+// box: {
+//   leftCol: undefined,
+//   topRow: undefined,
+//   rightCol: undefined,
+//   bottomRow: undefined,
+// },
+// route: 'SignIn',
+// isSignIn: false,
+// user: {
+//   id: '',
+//   name: '',
+//   email: '',
+//   entries: 0,
+//   joined: undefined,
+// },
+// }
 
 const App = () => {
   const [input, setInput] = useState('');
@@ -29,9 +48,26 @@ const App = () => {
     joined: undefined,
   });
 
-  const app = new Clarifai.App({
-    apiKey: '5228c4b5259e489183b3b39d2ac2dd40',
-  });
+  const resetState = () => {
+    // TODO object of initialState for shorter reset
+    setInput('');
+    setImageURL('');
+    setBox({
+      leftCol: undefined,
+      topRow: undefined,
+      rightCol: undefined,
+      bottomRow: undefined,
+    });
+    setRoute('signIn');
+    setIsSignIn(false);
+    setUser({
+      id: '',
+      name: '',
+      email: '',
+      entries: 0,
+      joined: undefined,
+    });
+  };
 
   const loadUser = (newUser: User) => {
     setUser({
@@ -63,16 +99,38 @@ const App = () => {
   const displayFaceBox = (box: Box) => {
     setBox(box);
   };
-  const onSubmit = () => {
+  const onPictureSubmit = () => {
     setImageURL(input);
-    app.models
-      .predict(Clarifai.FACE_DETECT_MODEL, input)
-      .then((resp: any) => displayFaceBox(calcFaceLocation(resp)))
+    fetch('http://localhost:3000/imageURL', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        input: input,
+      }),
+    })
+      .then((response) => response.json())
+      .then((resp: any) => {
+        if (resp) {
+          fetch('http://localhost:3000/image', {
+            method: 'put',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              id: user.id,
+            }),
+          })
+            .then((resp) => resp.json())
+            .then((count) => {
+              setUser({ ...user, entries: count });
+            });
+        }
+        displayFaceBox(calcFaceLocation(resp));
+      })
       .catch((err: Error) => console.log(err));
   };
+
   const onRouteChange = (route: string) => {
     if (route === 'signOut') {
-      setIsSignIn(false);
+      resetState();
     } else if (route === 'home') {
       setIsSignIn(true);
     }
@@ -87,7 +145,7 @@ const App = () => {
         <>
           <ImageLinkForm
             user={user}
-            onSubmit={onSubmit}
+            onPictureSubmit={onPictureSubmit}
             handleInputChange={handleInputChange}
           />
           <FaceRecognition box={box} imageURL={imageURL} />
