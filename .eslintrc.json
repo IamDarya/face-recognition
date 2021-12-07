@@ -11,8 +11,10 @@
     "react",
     "@typescript-eslint",
     "prettier",
+    "plugin:prettier/recommended"
     "react-hooks"
   ],
+  "plugins": ["import", "react", "@typescript-eslint", "prettier", "react-hooks"],
   "env": {
     "browser": true,
     "jasmine": true,
