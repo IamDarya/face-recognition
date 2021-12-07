@@ -3,16 +3,8 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended",
-    "prettier"
-  ],
-  "plugins": [
-    "import",
-    "react",
-    "@typescript-eslint",
     "prettier",
-    "plugin:prettier/recommended",
-    "react-hooks"
+    "plugin:prettier/recommended"
   ],
   "plugins": [
     "import",
