@@ -31,7 +31,7 @@ export const SignInForm = ({ onRouteChange, loadUser }: Props): JSX.Element => {
   const handleSignIn = () => {
     console.log(email, password);
     setSignInClicked(true);
-    fetch('http://limitless-fortress-33651.herokuapp.com/signIn', {
+    fetch('https://limitless-fortress-33651.herokuapp.com/signIn', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

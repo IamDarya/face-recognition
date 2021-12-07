@@ -33,7 +33,7 @@ export const Register = ({ onRouteChange, loadUser }: Props): JSX.Element => {
     if (!email || !name || !password) {
       setEmptyInput(true);
     } else {
-      fetch('http://limitless-fortress-33651.herokuapp.com/register', {
+      fetch('https://limitless-fortress-33651.herokuapp.com/register', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
