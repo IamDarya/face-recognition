@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import User from '../models/User';
 import { Error } from '../SignInForm/SignInForm';
 
+//TODO signIN and Register move to one comp form
+
 type Props = {
   onRouteChange: (route: string) => void;
   loadUser: (newUser: User) => void;
@@ -27,10 +29,11 @@ export const Register = ({ onRouteChange, loadUser }: Props): JSX.Element => {
   };
 
   const handleRegister = () => {
-    console.log(email, password, name);
     setREgisterClicked(true);
-    if (email !== '' && name !== '' && password !== '') {
-      fetch('http://localhost:3000/register', {
+    if (!email || !name || !password) {
+      setEmptyInput(true);
+    } else {
+      fetch('http://limitless-fortress-33651.herokuapp.com/register', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -41,15 +44,13 @@ export const Register = ({ onRouteChange, loadUser }: Props): JSX.Element => {
       })
         .then((resp) => resp.json())
         .then((user) => {
-          if (user) {
+          if (user.id) {
             loadUser(user);
             onRouteChange('home');
           } else {
             setWrongUserData(true);
           }
         });
-    } else {
-      setEmptyInput(true);
     }
   };
 

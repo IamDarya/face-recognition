@@ -101,7 +101,7 @@ const App = () => {
   };
   const onPictureSubmit = () => {
     setImageURL(input);
-    fetch('http://localhost:3000/imageURL', {
+    fetch('http://limitless-fortress-33651.herokuapp.com/imageURL', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -111,7 +111,7 @@ const App = () => {
       .then((response) => response.json())
       .then((resp: any) => {
         if (resp) {
-          fetch('http://localhost:3000/image', {
+          fetch('http://limitless-fortress-33651.herokuapp.com/image', {
             method: 'put',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
