@@ -3,10 +3,16 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "prettier"
   ],
-  "plugins": ["import", "react", "@typescript-eslint", "prettier", "react-hooks"],
+  "plugins": [
+    "import",
+    "react",
+    "@typescript-eslint",
+    "prettier",
+    "react-hooks"
+  ],
   "env": {
     "browser": true,
     "jasmine": true,
