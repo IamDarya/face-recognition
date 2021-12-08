@@ -9,6 +9,7 @@ import { SignInForm } from './components/SignInForm/SignInForm';
 import { Register } from './components/Register/Register';
 import User from './components/models/User';
 import { resetState } from './components/ResetFunc/ResetFunc';
+import ClarifaiResp from './components/models/ClarifaiResp';
 
 const App = () => {
   const [input, setInput] = useState('');
@@ -43,7 +44,7 @@ const App = () => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInput(event.currentTarget.value);
   };
-  const calcFaceLocation = (data: any) => {
+  const calcFaceLocation = (data: ClarifaiResp) => {
     const clarifaiFace =
       data.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById('image');
@@ -69,7 +70,7 @@ const App = () => {
       }),
     })
       .then((response) => response.json())
-      .then((resp: any) => {
+      .then((resp: ClarifaiResp) => {
         if (resp) {
           fetch('https://limitless-fortress-33651.herokuapp.com/image', {
             method: 'put',
