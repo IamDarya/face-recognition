@@ -8,26 +8,7 @@ import Box from './components/models/Box';
 import { SignInForm } from './components/SignInForm/SignInForm';
 import { Register } from './components/Register/Register';
 import User from './components/models/User';
-
-// const initialState = {
-// input: '',
-// imageURL: '',
-// box: {
-//   leftCol: undefined,
-//   topRow: undefined,
-//   rightCol: undefined,
-//   bottomRow: undefined,
-// },
-// route: 'SignIn',
-// isSignIn: false,
-// user: {
-//   id: '',
-//   name: '',
-//   email: '',
-//   entries: 0,
-//   joined: undefined,
-// },
-// }
+import { resetState } from './components/ResetFunc/ResetFunc';
 
 const App = () => {
   const [input, setInput] = useState('');
@@ -47,27 +28,6 @@ const App = () => {
     entries: 0,
     joined: undefined,
   });
-
-  const resetState = () => {
-    // TODO object of initialState for shorter reset
-    setInput('');
-    setImageURL('');
-    setBox({
-      leftCol: undefined,
-      topRow: undefined,
-      rightCol: undefined,
-      bottomRow: undefined,
-    });
-    setRoute('signIn');
-    setIsSignIn(false);
-    setUser({
-      id: '',
-      name: '',
-      email: '',
-      entries: 0,
-      joined: undefined,
-    });
-  };
 
   const loadUser = (newUser: User) => {
     setUser({
@@ -130,7 +90,7 @@ const App = () => {
 
   const onRouteChange = (route: string) => {
     if (route === 'signOut') {
-      resetState();
+      resetState(setInput, setImageURL, setBox, setRoute, setIsSignIn, setUser);
     } else if (route === 'home') {
       setIsSignIn(true);
     }
