@@ -16,7 +16,7 @@ export const Particle = (): JSX.Element => {
   return (
     <ParticleBackground
       params={{
-        autoPlay: true,
+        autoPlay: false,
         particles: {
           number: {
             value: 159,
