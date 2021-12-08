@@ -13,13 +13,13 @@ export const Register = ({ onRouteChange, loadUser }: Props): JSX.Element => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [wrongUserData, setWrongUserData] = useState(true);
+  const [wrongUserData, setWrongUserData] = useState(false);
+  const [emptyInput, setEmptyInput] = useState(false);
   const [registerClicked, setREgisterClicked] = useState(false);
 
   const onEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.currentTarget.value);
   };
-
   const onPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.currentTarget.value);
   };
@@ -29,13 +29,14 @@ export const Register = ({ onRouteChange, loadUser }: Props): JSX.Element => {
 
   useEffect(() => {
     if (!email || !password || !name) {
-      setWrongUserData(false);
+      setEmptyInput(true);
+    } else {
+      setEmptyInput(false);
     }
   }, [email, password, name]);
 
   const handleRegister = () => {
-    setREgisterClicked(true);
-    if (!wrongUserData) {
+    if (emptyInput === false) {
       fetch('https://limitless-fortress-33651.herokuapp.com/register', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
@@ -52,6 +53,9 @@ export const Register = ({ onRouteChange, loadUser }: Props): JSX.Element => {
             onRouteChange('home');
           } else {
             setWrongUserData(true);
+            setTimeout(() => {
+              setREgisterClicked(false);
+            }, 2500);
           }
         });
     }
@@ -93,13 +97,15 @@ export const Register = ({ onRouteChange, loadUser }: Props): JSX.Element => {
             />
           </div>
         </fieldset>
-        {registerClicked && wrongUserData && (
-          <Error>All fields should be filled</Error>
+        {registerClicked && wrongUserData && <Error>User already exist</Error>}
+        {registerClicked && emptyInput && (
+          <Error>All fields should be field</Error>
         )}
         <input
           onClick={(event) => {
             event.preventDefault();
             handleRegister();
+            setREgisterClicked(true);
           }}
           className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
           type="submit"
