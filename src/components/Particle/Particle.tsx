@@ -1,6 +1,7 @@
 import React from 'react';
 import Particles from 'react-particles-js';
 import styled from 'styled-components';
+import BeeImg from '../../assets/bee.png';
 
 const ParticleBackground = styled(Particles)`
   position: fixed;
@@ -36,7 +37,7 @@ export const Particle = (): JSX.Element => {
               nb_sides: 5,
             },
             image: {
-              src: 'https://cdn-icons-png.flaticon.com/512/809/809154.png',
+              src: `${BeeImg}`,
               width: 100,
               height: 100,
             },

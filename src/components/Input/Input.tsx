@@ -10,6 +10,7 @@ const Inpt = styled.input`
   border: 1px solid #424242;
   border-radius: 10px 0 0 10px;
   padding: 0 5px;
+  width: 25vw;
   &:focus-visible {
     outline: none;
   }
