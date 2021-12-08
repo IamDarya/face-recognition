@@ -157,7 +157,7 @@ export const Particle = () => {
           },
           modes: {
             bubble: {
-              distance: 400,
+              distance: 500,
               duration: 2,
               opacity: 0.8,
               size: 40,
@@ -177,7 +177,7 @@ export const Particle = () => {
           },
           links: {
             color: '#ffffff',
-            distance: 150,
+            distance: 200,
             enable: false,
             opacity: 0.5,
             width: 1,
@@ -196,19 +196,31 @@ export const Particle = () => {
           number: {
             density: {
               enable: true,
-              value_area: 800,
+              value_area: 900,
             },
             value: 80,
           },
           opacity: {
-            value: 0.5,
+            value: 0.7,
           },
           shape: {
-            type: 'circle',
+            type: 'image',
+            stroke: {
+              width: 0,
+              color: '#000000',
+            },
+            polygon: {
+              nb_sides: 5,
+            },
+            image: {
+              src: `${BeeImg}`,
+              width: 200,
+              height: 200,
+            },
           },
           size: {
             random: true,
-            value: 4,
+            value: 12,
           },
         },
         detectRetina: true,
