@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import User from '../models/User';
 import './SignInForm.css';
@@ -28,8 +28,13 @@ export const SignInForm = ({ onRouteChange, loadUser }: Props): JSX.Element => {
     setPassword(event.currentTarget.value);
   };
 
+  useEffect(() => {
+    if (!email || !password) {
+      setWrongUserData(false);
+    }
+  }, [email, password]);
+
   const handleSignIn = () => {
-    console.log(email, password);
     setSignInClicked(true);
     fetch('https://limitless-fortress-33651.herokuapp.com/signIn', {
       method: 'post',

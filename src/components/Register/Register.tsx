@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import User from '../models/User';
 import { Error } from '../SignInForm/SignInForm';
 
@@ -15,7 +15,6 @@ export const Register = ({ onRouteChange, loadUser }: Props): JSX.Element => {
   const [password, setPassword] = useState('');
   const [wrongUserData, setWrongUserData] = useState(true);
   const [registerClicked, setREgisterClicked] = useState(false);
-  const [emptyInput, setEmptyInput] = useState(true);
 
   const onEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.currentTarget.value);
@@ -28,11 +27,15 @@ export const Register = ({ onRouteChange, loadUser }: Props): JSX.Element => {
     setName(event.currentTarget.value);
   };
 
+  useEffect(() => {
+    if (!email || !password || !name) {
+      setWrongUserData(false);
+    }
+  }, [email, password, name]);
+
   const handleRegister = () => {
     setREgisterClicked(true);
-    if (!email || !name || !password) {
-      setEmptyInput(true);
-    } else {
+    if (!wrongUserData) {
       fetch('https://limitless-fortress-33651.herokuapp.com/register', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
@@ -55,7 +58,6 @@ export const Register = ({ onRouteChange, loadUser }: Props): JSX.Element => {
   };
 
   return (
-    //TODO useEffect
     <main className="pa4 black-80">
       <form className="measure center">
         <fieldset className="ba b--transparent ph0 mh0">
@@ -91,7 +93,7 @@ export const Register = ({ onRouteChange, loadUser }: Props): JSX.Element => {
             />
           </div>
         </fieldset>
-        {registerClicked && emptyInput && (
+        {registerClicked && wrongUserData && (
           <Error>All fields should be filled</Error>
         )}
         <input
