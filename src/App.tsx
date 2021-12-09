@@ -10,6 +10,7 @@ import { Register } from './components/Register/Register';
 import User from './components/models/User';
 import { resetState } from './components/ResetFunc/ResetFunc';
 import ClarifaiResp from './components/models/ClarifaiResp';
+import Loader from './components/Loader/Loader';
 
 const App = () => {
   const [input, setInput] = useState('');
@@ -98,8 +99,15 @@ const App = () => {
     setRoute(route);
   };
 
+  const [loading, setLoading] = useState(true);
+
+  window.onload = () => {
+    setLoading(false);
+  };
+
   return (
     <div className="App">
+      <Loader show={loading} />
       <Particle />
       <Navigation onRouteChange={onRouteChange} isSignIn={isSignIn} />
       {route === 'home' ? (
