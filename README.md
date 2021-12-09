@@ -1,3 +1,7 @@
+# face-recognition
+This app detects faces and outputs bounding boxes.
+# https://face-recognition-app-clarifai.herokuapp.com/
+=======
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
