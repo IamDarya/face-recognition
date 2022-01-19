@@ -6,7 +6,7 @@ export const Particle = () => {
   return (
     <Particles
       id="tsparticles"
-      loaded={Particle}
+      // loaded={Particle}
       options={{
         autoPlay: true,
         particles: {
