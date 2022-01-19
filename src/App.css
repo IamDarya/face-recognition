@@ -1,8 +1,8 @@
 .App {
   text-align: center;
   background-color: #e5e5f700;
-  background-image: radial-gradient(#42424235 0.8px, transparent 0.8px),
-    radial-gradient(#42424235 0.8px, #e5e5f700 0.8px);
+  background-image: radial-gradient(#424242bd 0.8px, transparent 0.8px),
+    radial-gradient(#424242bd 0.8px, #e5e5f700 0.8px);
   background-size: 50px 50px;
   background-position: 0 0, 25px 25px;
   height: 100vh;
