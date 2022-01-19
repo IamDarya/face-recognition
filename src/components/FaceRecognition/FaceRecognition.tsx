@@ -8,7 +8,10 @@ const Wrap = styled(Wrapper)`
   margin-top: 190px;
 `;
 const ImageView = styled.img`
-  height: 55vh;
+  height: 30vw;
+  @media (max-width: 550px) {
+    height: 40vw;
+  }
 `;
 export const ReconditionedFaceBox = styled.div<{ box: Box }>`
   position: absolute;
@@ -31,7 +34,11 @@ type Props = {
 export const FaceRecognition = ({ imageURL, box }: Props): JSX.Element => {
   return (
     <Wrap>
-      <ImageView id="image" src={imageURL} alt="" />
+      <ImageView
+        id="image"
+        src={imageURL}
+        alt={imageURL === '' ? '' : 'picture with people'}
+      />
       <ReconditionedFaceBox box={box}></ReconditionedFaceBox>
     </Wrap>
   );
